@@ -5,7 +5,7 @@
   "author": "Cheolkeong",
   "version": "0.0.2",
   "minimumCoreVersion": "0.7.4",
-  "compatibleCoreVersion": "0.7.4"
+  "compatibleCoreVersion": "0.7.4",
   "scripts": [
     "scripts/animated-aoe.js"
   ],
