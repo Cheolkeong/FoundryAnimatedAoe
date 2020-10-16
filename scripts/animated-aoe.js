@@ -104,17 +104,43 @@ class AnimatedAoe {
     			delay : stateLights?.[index]?.delay || animationLight.delay
     		}
     	})
-    	return {totalDuration, lights: mergedLights};
+    	return this._animateAoe({totalDuration, lights: mergedLights, sounds: null, delay: null});
     };
 
-    // async _animateAoe({
-    // 	totalDuration,
-    // 	lights,
-    // 	sounds,
-    // 	delay = 0
-    // }) {
-    	
-    // }
+    _helperTimeout(interval) {
+	  return new Promise((resolve, reject) => {
+	    setTimeout(function(){
+	      resolve("done");
+	    }, interval);
+	  });
+	};
+
+    async _animateAoe({
+    	totalDuration,
+    	lights,
+    	sounds,
+    	delay = 0
+    }) {
+    	if(delay && delay > 0) {
+    		await this._helperTimeout(delay);
+    	}
+    	let deadline;
+    	if(totalDuration){
+    		deadline = this._helperTimeout(totalDuration);
+    	}
+    	const lightPromises = lights.map((light)=>{
+    		return AmbientLight.create({
+    			...light.light
+    		});
+    	});
+    	const lightObjects = await Promise.all(lightPromises);
+    	if(totalDuration) {
+    		await deadline;
+    	}
+    	lightObjects.map((lightObject) {
+    		return lightObject.delete();
+    	});
+    }
 }
 
 Hooks.on('init', () => game.animatedAoe = new AnimatedAoe());
