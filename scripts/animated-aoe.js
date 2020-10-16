@@ -5,7 +5,7 @@ class AnimatedAoe {
             hint: "The name of the journal entry to use for Animation JSON. There can only be one. Refer to README file in module website for how to configure triggers.",
             scope: "world",
             config: true,
-            default: "Trigger Happy",
+            default: "Animated Aoe",
             type: String,
             onChange: this._parseJournals.bind(this)
         });
