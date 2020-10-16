@@ -20,6 +20,7 @@ class AnimatedAoe {
         Hooks.on("ready", this._parseJournals.bind(this));
         // Hooks.on("canvasReady", this._onCanvasReady.bind(this));
         // Hooks.on('controlToken', this._onControlToken.bind(this));
+	Hooks.on('animateAoe', this._handleAnimateAoeEvent.bind(this, manifestKey, stateAnimation);
         Hooks.on('createJournalEntry', this._parseJournals.bind(this));
         Hooks.on('updateJournalEntry', this._parseJournals.bind(this));
         Hooks.on('deleteJournalEntry', this._parseJournals.bind(this));
@@ -56,10 +57,64 @@ class AnimatedAoe {
         }
         this.journals.forEach(journal => this._parseJournal(journal));
     }
+
     _parseJournal(journal) {
         this.animationManifest = JSON.parse(journal.data.content.replace(/(<p>|<\/p>|<\/code>|<code>|<br *\/?>)/gm, '\n'))
         console.log(this.animationManifest);
     }
+
+    _handleAnimateAoeEvent(manifestKey, stateAnimation) {
+    	let animateAoeObject;
+    	let manifestAnimation;
+    	if(this.animationManifest?.[manifestKey]){
+    		console.log('aoe event captured');
+    		manifestAnimation = this.animationManifest[manifestKey];
+    		animateAoeObject = this._extendAnimationWithState({stateAnimation, manifestAnimation});
+    	}
+    	console.log(animateAoeObject);
+    	return false;
+    }
+
+    _extendAnimationWithState({
+    	stateAnimation,
+    	manifestAnimation,
+    }) {
+    	const totalDuration = stateAnimation.totalDuration || manifestAnimation.totalDuration;
+    	const stateLights = stateAnimation.lights || [];
+    	const animationLights = manifestAnimation.lights || [];
+    	const mergedLights = animationLights.map((animationLight, index)=> {
+    		return {
+    			light : {
+    				t: stateLights?.[index]?.t || animationLight.t || 'l',
+	    			x: stateLights?.[index]?.x || animationLight.x || 1000,
+	    			y: stateLights?.[index]?.y || animationLight.y || 1000,
+	    			rotation: stateLights?.[index]?.rotation || animationLight.rotation || 0,
+	    			dim: stateLights?.[index]?.dim || animationLight.dim || 0,
+	    			bright: stateLights?.[index]?.bright || animationLight.bright || 0,
+	    			angle: stateLights?.[index]?.angle || animationLight.angle || 360,
+	    			tintColor: stateLights?.[index]?.tintColor || animationLight.tintColor || '#cccccc',
+	    			tintAlpha: stateLights?.[index]?.tintAlpha || animationLight.tintAlpha || 0.5,
+	    			lightAnimation: {
+	    				type: stateLights?.[index]?.lightAnimation?.type || animationLight?.lightAnimation?.type || 'fog',
+	    				speed: stateLights?.[index]?.lightAnimation?.speed || animationLight?.lightAnimation?.speed || 5,
+	    				intensity: stateLights?.[index]?.lightAnimation?.intensity || animationLight?.lightAnimation?.intensity || 5
+	    			}
+    			},
+    			duration : stateLights?.[index]?.duration || animationLight.duration || ;
+    			delay : stateLights?.[index]?.delay || animationLight.delay;
+    		}
+    	})
+    	return {totalDuration, lights: mergedLights};
+    };
+
+    // async _animateAoe({
+    // 	totalDuration,
+    // 	lights,
+    // 	sounds,
+    // 	delay = 0
+    // }) {
+    	
+    // }
 }
 
 Hooks.on('init', () => game.animatedAoe = new AnimatedAoe());
