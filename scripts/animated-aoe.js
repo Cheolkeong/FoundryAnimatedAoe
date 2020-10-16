@@ -144,18 +144,12 @@ class AnimatedAoe {
     	if(totalDuration){
     		deadline = this._helperTimeout(totalDuration);
     	}
-    	const lightPromises = lights.map((light)=>{
-    		return AmbientLight.create({
-    			...light.light
-    		});
-    	});
-    	const soundPromises = sounds.map((sound)=>{
-    		return AmbientSound.create({
-    			...sound.sound
-    		});
-    	});
-    	const lightObjects = await Promise.all(lightPromises);
-    	const soundObjects = await Promise.all(soundPromises);
+    	const lightObjects = await canvas.lighting.createMany(lights.map((light)=>{
+    		return {...light.light};
+    	}));
+    	const soundObjects = await canvas.sounds.createMany(sounds.map((sound)=>{
+    		return {...sound.sound};
+    	}));
     	if (totalDuration) {
     		await deadline;
     		const lightIds = lightObjects.map((lightObject) => {
