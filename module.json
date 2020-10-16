@@ -1,0 +1,8 @@
+{
+  "name": "animated-aoe",
+  "title": "Animated Aoe - Support for template-based audio and visual macros",
+  "description": "A framework of hooks to allow spellcasting or bomb tossing players to target with style",
+  "author": "Cheolkeong",
+  "version": "0.0.1",
+  "minimumCoreVersion": "0.7.4"
+}
