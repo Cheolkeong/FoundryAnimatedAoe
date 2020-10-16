@@ -154,11 +154,9 @@ class AnimatedAoe {
     			...sound.sound
     		});
     	});
-    	let lightObjects = Promise.all(lightPromises);
-    	let soundObjects = Promise.all(soundPromises);
+    	const lightObjects = await Promise.all(lightPromises);
+    	const soundObjects = await Promise.all(soundPromises);
     	if (totalDuration) {
-    		lightObjects = await lightObjects;
-    		soundObjects = await soundObjects;
     		await deadline;
     		const lightIds = lightObjects.map((lightObject) => {
     			return lightObject.id;
