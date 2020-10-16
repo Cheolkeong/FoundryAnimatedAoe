@@ -160,12 +160,14 @@ class AnimatedAoe {
     		lightObjects = await lightObjects;
     		soundObjects = await soundObjects;
     		await deadline;
-    		lightObjects.map((lightObject) => {
-    			return lightObject.delete();
+    		const lightIds = lightObjects.map((lightObject) => {
+    			return lightObject.id;
     		});
-    		soundObjects.map((soundObject) => {
-    			return soundObject.delete();
+    		const soundIds = soundObjects.map((soundObject) => {
+    			return soundObject.id;
     		});
+    		await canvas.sounds.deleteMany(soundIds);
+    		await canvas.lighting.deleteMany(lightIds);
     	}
     	
     }
