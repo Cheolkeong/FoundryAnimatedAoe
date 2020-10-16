@@ -9,7 +9,7 @@
   "scripts": [
     "scripts/animated-aoe.js"
   ],
-  "url", "https://github.com/Cheolkeong/FoundryAnimatedAoe",
+  "url": "https://github.com/Cheolkeong/FoundryAnimatedAoe",
   "manifest": "https://raw.githubusercontent.com/Cheolkeong/FoundryAnimatedAoe/main/module.json",
   "download": "https://github.com/Cheolkeong/FoundryAnimatedAoe/archive/v0.0.5.zip"
 }
