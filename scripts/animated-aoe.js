@@ -137,7 +137,7 @@ class AnimatedAoe {
     	if(totalDuration) {
     		await deadline;
     	}
-    	lightObjects.map((lightObject) {
+    	lightObjects.map((lightObject) => {
     		return lightObject.delete();
     	});
     }
