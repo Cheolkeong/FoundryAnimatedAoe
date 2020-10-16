@@ -83,7 +83,7 @@ class AnimatedAoe {
     	const stateLights = stateAnimation.lights || [];
     	const animationLights = manifestAnimation.lights || [];
     	const stateSounds = stateAnimation.sounds || [];
-    	const animationSoundss = manifestAnimation.sounds || [];
+    	const animationSounds = manifestAnimation.sounds || [];
     	const mergedLights = animationLights.map((animationLight, index)=> {
     		return {
     			light : {
