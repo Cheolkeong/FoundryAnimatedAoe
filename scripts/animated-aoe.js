@@ -100,7 +100,7 @@ class AnimatedAoe {
 	    				intensity: stateLights?.[index]?.lightAnimation?.intensity || animationLight?.lightAnimation?.intensity || 5
 	    			}
     			},
-    			duration : stateLights?.[index]?.duration || animationLight.duration || ;
+    			duration : stateLights?.[index]?.duration || animationLight.duration;
     			delay : stateLights?.[index]?.delay || animationLight.delay;
     		}
     	})
