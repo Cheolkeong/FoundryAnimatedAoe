@@ -157,8 +157,8 @@ class AnimatedAoe {
     	const lightObjects = Promise.all(lightPromises);
     	const soundObjects = Promise.all(soundPromises);
     	if (totalDuration) {
-    		await lightObjects;
-    		await soundObjects;
+    		lightObjects = await lightObjects;
+    		soundObjects = await soundObjects;
     		await deadline;
     		lightObjects.map((lightObject) => {
     			return lightObject.delete();
