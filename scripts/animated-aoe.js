@@ -153,10 +153,10 @@ class AnimatedAoe {
     	if (totalDuration) {
     		await deadline;
     		const lightIds = lightObjects.map((lightObject) => {
-    			return lightObject.id;
+    			return lightObject._id;
     		});
     		const soundIds = soundObjects.map((soundObject) => {
-    			return soundObject.id;
+    			return soundObject._id;
     		});
     		await canvas.sounds.deleteMany(soundIds);
     		await canvas.lighting.deleteMany(lightIds);
