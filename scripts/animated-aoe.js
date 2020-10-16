@@ -61,3 +61,5 @@ class AnimatedAoe {
         console.log(this.animationManifest);
     }
 }
+
+Hooks.on('init', () => game.animatedAoe = new AnimatedAoe());
