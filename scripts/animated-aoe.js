@@ -154,8 +154,8 @@ class AnimatedAoe {
     			...sound.sound
     		});
     	});
-    	const lightObjects = Promise.all(lightPromises);
-    	const soundObjects = Promise.all(soundPromises);
+    	let lightObjects = Promise.all(lightPromises);
+    	let soundObjects = Promise.all(soundPromises);
     	if (totalDuration) {
     		lightObjects = await lightObjects;
     		soundObjects = await soundObjects;
