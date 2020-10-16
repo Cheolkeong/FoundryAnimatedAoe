@@ -160,7 +160,7 @@ class AnimatedAoe {
     		await lightObjects;
     		await soundObjects;
     		await deadline;
-    		soundObjects.map((lightObject) => {
+    		lightObjects.map((lightObject) => {
     			return lightObject.delete();
     		});
     		soundObjects.map((soundObject) => {
