@@ -82,6 +82,8 @@ class AnimatedAoe {
     	const totalDuration = stateAnimation.totalDuration || manifestAnimation.totalDuration;
     	const stateLights = stateAnimation.lights || [];
     	const animationLights = manifestAnimation.lights || [];
+    	const stateSounds = stateAnimation.sounds || [];
+    	const animationSoundss = manifestAnimation.sounds || [];
     	const mergedLights = animationLights.map((animationLight, index)=> {
     		return {
     			light : {
@@ -104,7 +106,21 @@ class AnimatedAoe {
     			delay : stateLights?.[index]?.delay || animationLight.delay
     		}
     	})
-    	return this._animateAoe({totalDuration, lights: mergedLights, sounds: null, delay: null});
+    	const mergedSounds = animationSounds.map((animationSound, index)=> {
+    		return {
+    			sound : {
+    				t: stateSounds?.[index]?.t || animationSound.t || 'l',
+	    			x: stateSounds?.[index]?.x || animationSound.x || 1000,
+	    			y: stateSounds?.[index]?.y || animationSound.y || 1000,
+	    			radius: stateSounds?.[index]?.radius || animationSound.radius || 50,
+	    			volume: stateSounds?.[index]?.volume || animationSound.volume || 0.5,
+	    			path: stateSounds?.[index]?.path || animationSound.path || '',
+    			},
+    			duration : stateSounds?.[index]?.duration || animationSound.duration,
+    			delay : stateSounds?.[index]?.delay || animationSound.delay
+    		}
+    	})
+    	return this._animateAoe({totalDuration, lights: mergedLights, sounds: mergedSounds, delay: null});
     };
 
     _helperTimeout(interval) {
@@ -133,13 +149,25 @@ class AnimatedAoe {
     			...light.light
     		});
     	});
-    	const lightObjects = await Promise.all(lightPromises);
-    	if(totalDuration) {
-    		await deadline;
-    	}
-    	lightObjects.map((lightObject) => {
-    		return lightObject.delete();
+    	const soundPromises = sounds.map((sound)=>{
+    		return AmbientSound.create({
+    			...sound.sound
+    		});
     	});
+    	const lightObjects = Promise.all(lightPromises);
+    	const soundObjects = Promise.all(soundPromises);
+    	if (totalDuration) {
+    		await lightObjects;
+    		await soundObjects;
+    		await deadline;
+    		soundObjects.map((lightObject) => {
+    			return lightObject.delete();
+    		});
+    		soundObjects.map((soundObject) => {
+    			return soundObject.delete();
+    		});
+    	}
+    	
     }
 }
 
