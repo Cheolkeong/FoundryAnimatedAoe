@@ -20,7 +20,15 @@ class AnimatedAoe {
         Hooks.on("ready", this._parseJournals.bind(this));
         // Hooks.on("canvasReady", this._onCanvasReady.bind(this));
         // Hooks.on('controlToken', this._onControlToken.bind(this));
-	Hooks.on('animateAoe', this._handleAnimateAoeEvent.bind(this));
+        game.socket.on('module.animatedAoe', (data) = >{
+        	if(game.user.isGM && data.op === 'animate') {
+        		Hooks.call('animateAoe', data.manifestKey, data.stateAnimation);
+        	}
+        	if(!game.users.filter((u) => u.active && u.isGM).length && (data.user === game.user.id)) {
+        		ui.notifications.warn('GM must be present for animation macros to work');
+        	}
+        })
+		Hooks.on('animateAoe', this._handleAnimateAoeEvent.bind(this));
         Hooks.on('createJournalEntry', this._parseJournals.bind(this));
         Hooks.on('updateJournalEntry', this._parseJournals.bind(this));
         Hooks.on('deleteJournalEntry', this._parseJournals.bind(this));
@@ -74,6 +82,8 @@ class AnimatedAoe {
     	console.log(animateAoeObject);
     	return false;
     }
+
+    _handleAnimateAoePlayerSocket()
 
     _extendAnimationWithState({
     	stateAnimation,
