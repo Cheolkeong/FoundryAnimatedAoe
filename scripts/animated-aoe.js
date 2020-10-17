@@ -20,7 +20,7 @@ class AnimatedAoe {
         Hooks.on("ready", this._parseJournals.bind(this));
         // Hooks.on("canvasReady", this._onCanvasReady.bind(this));
         // Hooks.on('controlToken', this._onControlToken.bind(this));
-        game.socket.on('module.animatedAoe', (data) => {
+        game.socket.on('module.animated-aoe', (data) => {
         	if(game.user.isGM && data.op === 'animate') {
         		Hooks.call('animateAoe', data.manifestKey, data.stateAnimation);
         	}
