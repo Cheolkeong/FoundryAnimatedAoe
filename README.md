@@ -197,4 +197,44 @@ window.Hooks.once('spellcast', async ({successful}) => {
 })();
 ```
 
-CONFIRMATION MACRO COMING MOMENTARILY
+Confirmation Macro:
+```
+// Cast Macro
+
+
+const getTokenByName = (tokenName) => {
+	return canvas.scene.data.tokens.map((token, index) => {
+		token.index = index;
+		return token;
+	}).filter((token) => {
+		return token.name === tokenName;
+	})[0];
+};
+
+const getActorByName = (actorName) => {
+	const token = getTokenByName(actorName);
+	const myActorId = token.actorId;
+	return game.actors.get(myActorId);
+};
+
+const controlName = 'token';
+ui.controls.activeControl = controlName;
+    const control = ui.controls.controls.find(c => c.name === controlName);
+    if ( control && control.layer ) canvas.getLayer(control.layer).activate();
+
+const purryToken = getTokenByName('Purry');
+canvas.tokens.selectObjects({
+x: purryToken.x - 1,
+y: purryToken.y -1,
+width: 257,
+height: 257
+});
+
+Hooks.call('spellcast',{successful: true});
+
+const purryActor = getActorByName('Purry')
+
+purryActor.setFlag('world', 'widenSpellActive', false);
+purryActor.setFlag('world', 'familiarConduitActive', false);
+purryActor.setFlag('world', 'castingSpell', false);
+```
