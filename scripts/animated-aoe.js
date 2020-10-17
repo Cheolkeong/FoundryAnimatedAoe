@@ -155,11 +155,11 @@ class AnimatedAoe {
     	//TODO: This is ugly but what it it works?
     	if (totalDuration) {
     		await deadline;
-    		const lightIds = lights.length === 1 ? [lightObjects._id]
+    		const lightIds = lights.length === 1 ? [lightObjects.data._id]
     		: lightObjects.map((lightObject) => {
     			return lightObject._id;
     		});
-    		const soundIds = sounds.length === 1 ? [soundObjects._id]
+    		const soundIds = sounds.length === 1 ? [soundObjects.data._id]
     		: soundObjects.map((soundObject) => {
     			return soundObject._id;
     		});
