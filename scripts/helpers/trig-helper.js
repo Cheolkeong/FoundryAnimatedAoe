@@ -30,7 +30,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (originY - targetY)*(-deltaX/deltaY);
+			baseAngleX = (-deltaX/deltaY)*originY + targetX;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
@@ -52,7 +52,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (originY - targetY)*(-deltaX/deltaY);
+			baseAngleX = (-deltaX/deltaY)*originY + targetX;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
@@ -62,7 +62,7 @@ class TrigHelper {
 
 	findAngle(width, originX, originY, targetX, targetY){
 		let delta = this.findDistanceDelta(originX - targetX, originY - targetY);
-		return 2 * this.radiansToDegrees(Math.atan(delta/(0.5 * width)));
+		return 2 * this.radiansToDegrees(Math.atan((0.5 * width)/delta));
 	}
 
 	findDistanceDelta(deltaX, deltaY) {
