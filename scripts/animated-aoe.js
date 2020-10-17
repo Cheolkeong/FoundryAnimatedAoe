@@ -148,7 +148,7 @@ class AnimatedAoe {
     	: await canvas.lighting.createMany(lights.map((light)=>{
     		return {...light.light};
     	}));
-    	const soundObjects = sounds.length === 1 ? await AmbientSound.create({...sounds[0].sounds})
+    	const soundObjects = sounds.length === 1 ? await AmbientSound.create({...sounds[0].sound})
     	: await canvas.sounds.createMany(sounds.map((sound)=>{
     		return {...sound.sound};
     	}));
