@@ -144,18 +144,23 @@ class AnimatedAoe {
     	if(totalDuration){
     		deadline = this._helperTimeout(totalDuration);
     	}
-    	const lightObjects = await canvas.lighting.createMany(lights.map((light)=>{
+    	const lightObjects = await lights.length ==== 1 ?  AmbientLight.create({...lights[0].light})
+    	: canvas.lighting.createMany(lights.map((light)=>{
     		return {...light.light};
     	}));
-    	const soundObjects = await canvas.sounds.createMany(sounds.map((sound)=>{
+    	const soundObjects = await sounds.length === 1 ? AmbientSound.create({...sounds[0].sounds})
+    	: canvas.sounds.createMany(sounds.map((sound)=>{
     		return {...sound.sound};
     	}));
+    	//TODO: This is ugly but what it it works?
     	if (totalDuration) {
     		await deadline;
-    		const lightIds = lightObjects.map((lightObject) => {
+    		const lightIds = lights.length === 1 ? [lightObjects]
+    		: lightObjects.map((lightObject) => {
     			return lightObject._id;
     		});
-    		const soundIds = soundObjects.map((soundObject) => {
+    		const soundIds = sounds.length === 1 ? [soundObjects]
+    		: soundObjects.map((soundObject) => {
     			return soundObject._id;
     		});
     		await canvas.sounds.deleteMany(soundIds);
