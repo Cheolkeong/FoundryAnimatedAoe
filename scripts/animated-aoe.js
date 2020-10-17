@@ -1,3 +1,5 @@
+import TrigHelper from './helpers/trig-helper.js';
+
 class AnimatedAoe {
 	constructor() {
         game.settings.register("animated-aoe", "journalName", {
@@ -36,6 +38,7 @@ class AnimatedAoe {
         // Hooks.on("preUpdateWall", this._onPreUpdateWall.bind(this));
 
         this.animationManifest = {};
+	this.trigHelp = new TrigHelper();
     }
 
     get journalName() {
