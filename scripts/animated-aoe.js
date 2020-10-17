@@ -144,7 +144,7 @@ class AnimatedAoe {
     	if(totalDuration){
     		deadline = this._helperTimeout(totalDuration);
     	}
-    	const lightObjects = lights.length ==== 1 ?  await AmbientLight.create({...lights[0].light})
+    	const lightObjects = lights.length === 1 ?  await AmbientLight.create({...lights[0].light})
     	: await canvas.lighting.createMany(lights.map((light)=>{
     		return {...light.light};
     	}));
