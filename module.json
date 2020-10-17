@@ -7,7 +7,8 @@
   "minimumCoreVersion": "0.7.4",
   "compatibleCoreVersion": "0.7.4",
   "scripts": [
-    "scripts/animated-aoe.js"
+    "scripts/animated-aoe.js",
+    "scripts/trig-helper.js"
   ],
   "socket": true,
   "url": "https://github.com/Cheolkeong/FoundryAnimatedAoe",
