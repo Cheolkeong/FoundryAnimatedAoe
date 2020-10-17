@@ -83,8 +83,6 @@ class AnimatedAoe {
     	return false;
     }
 
-    _handleAnimateAoePlayerSocket()
-
     _extendAnimationWithState({
     	stateAnimation,
     	manifestAnimation,
