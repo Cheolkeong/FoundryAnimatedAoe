@@ -3,7 +3,7 @@ class TrigHelper {
 	}
 
 	findRotation(originX, originY, targetX, targetY) {
-		(this.radiansToDegrees(Math.atan2(targetX - originX, originY - targetY)) + 180) % 360
+		return (this.radiansToDegrees(Math.atan2(targetX - originX, originY - targetY)) + 180) % 360;
 	}
 
 	findAngle(width, originX, originY, targetX, targetY){
