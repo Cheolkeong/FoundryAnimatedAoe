@@ -133,7 +133,7 @@ class AnimatedAoe {
 	    			y: stateSounds?.[index]?.y || animationSound.y || 1000,
 	    			radius: stateSounds?.[index]?.radius || animationSound.radius || 50,
 	    			volume: stateSounds?.[index]?.volume || animationSound.volume || 0.5,
-	    			path: rootForSoundAssets + (stateSounds?.[index]?.path || animationSound.path || ''),
+	    			path: game.settings.get('animate-aoe', 'rootForSoundAssets') + (stateSounds?.[index]?.path || animationSound.path || ''),
     			},
     			duration : stateSounds?.[index]?.duration || animationSound.duration,
     			delay : stateSounds?.[index]?.delay || animationSound.delay
