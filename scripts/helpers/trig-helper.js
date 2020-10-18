@@ -20,7 +20,7 @@ class TrigHelper {
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
 			baseAngleX = originX;
-			baseAngleY = (-deltaY/deltaX)*deltaX + targetY;
+			baseAngleY = (deltaY/deltaX)*deltaX + targetY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
 		}
@@ -30,7 +30,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (-deltaX/deltaY)*deltaY + targetX;
+			baseAngleX = (deltaX/deltaY)*deltaY + targetX;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
@@ -42,7 +42,7 @@ class TrigHelper {
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
 			baseAngleX = originX;
-			baseAngleY = (-deltaY/deltaX)*deltaX + targetY;
+			baseAngleY = (deltaY/deltaX)*deltaX + targetY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
 		}
@@ -52,7 +52,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (-deltaX/deltaY)*deltaY + targetX;
+			baseAngleX = (deltaX/deltaY)*deltaY + targetX;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
