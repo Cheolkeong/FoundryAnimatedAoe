@@ -1,6 +1,9 @@
 # FoundryAnimatedAoe
 For use in rigging up player and gm macros to punctuate spell and item effects with sounds and light animations.
 
+![Color Spray](https://i.imgur.com/Bwjzd5z.mp4)
+![Magic Missile](https://i.imgur.com/zBJdnky.mp4)
+
 # WARNING: THIS MODULE IS INCREDIBLY UNSTABLE AT THE MOMENT
 
 # Vision
