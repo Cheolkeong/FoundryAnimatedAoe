@@ -1,7 +1,7 @@
 # FoundryAnimatedAoe
 For use in rigging up player and gm macros to punctuate spell and item effects with sounds and light animations.
 
-![Demo Gif](https://media3.giphy.com/media/7Wwj55hey09HsqDNp7/giphy.gif)
+https://media3.giphy.com/media/7Wwj55hey09HsqDNp7/giphy.gif
 
 # WARNING: THIS MODULE IS INCREDIBLY UNSTABLE AT THE MOMENT
 
