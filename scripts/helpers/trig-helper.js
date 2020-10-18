@@ -8,6 +8,8 @@ class TrigHelper {
 		let baseAngleY;
 		let adjacentDistance;
 		let oppositeDistance;
+		let m;
+		let b;
 		const deltaX = targetX - originX;
 		const deltaY = targetY - originY;
 		if ((deltaX === 0) && (deltaY === 0)) {
@@ -19,8 +21,10 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
+			m = (deltaX/deltaY);
+			b = targetY - (m * targetX);
 			baseAngleX = originX;
-			baseAngleY = (deltaY/deltaX)*deltaX + targetY;
+			baseAngleY = m * originX + b;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
 		}
@@ -30,7 +34,9 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (deltaX/deltaY)*deltaY + targetX;
+			m = (deltaX/deltaY);
+			b = targetY - (m * targetX);
+			baseAngleX = (originY - b)/m;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
@@ -41,8 +47,10 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
+			m = (-deltaX/deltaY);
+			b = targetY - (m * targetX);
 			baseAngleX = originX;
-			baseAngleY = (deltaY/deltaX)*deltaX + targetY;
+			baseAngleY = m * originX + b;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
 		}
@@ -52,7 +60,9 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			baseAngleX = (deltaX/deltaY)*deltaY + targetX;
+			m = (-deltaX/deltaY);
+			b = targetY - (m * targetX);
+			baseAngleX = (originY - b)/m;
 			baseAngleY = originY;
 			oppositeDistance = (baseAngleX - targetX, baseAngleY - targetY);
 			return this.radiansToDegrees(Math.atan(oppositeDistance / adjacentDistance)) + baseAngle;
