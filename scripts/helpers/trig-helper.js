@@ -21,7 +21,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			m = (deltaX/deltaY);
+			m = (-deltaX/deltaY);
 			b = targetY - (m * targetX);
 			baseAngleX = originX;
 			baseAngleY = m * originX + b;
@@ -34,7 +34,7 @@ class TrigHelper {
 				return baseAngle;
 			}
 			adjacentDistance = this.findDistanceDelta(deltaX, deltaY);
-			m = (deltaX/deltaY);
+			m = (-deltaX/deltaY);
 			b = targetY - (m * targetX);
 			baseAngleX = (originY - b)/m;
 			baseAngleY = originY;
