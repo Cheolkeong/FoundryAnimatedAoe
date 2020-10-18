@@ -11,6 +11,14 @@ class AnimatedAoe {
             type: String,
             onChange: this._parseJournals.bind(this)
         });
+	game.settings.register("animated-aoe", "rootForSoundAssets", {
+            name: "Root Path for Sound Assets",
+            hint: "particularly for use with servers as journals mess with urls on save",
+            scope: "world",
+            config: true,
+            default: "",
+            type: String
+        });
         game.settings.register("animated-aoe", "enableAnimatedAoe", {
             name: "Enable animations when running as GM",
             scope: "client",
@@ -125,7 +133,7 @@ class AnimatedAoe {
 	    			y: stateSounds?.[index]?.y || animationSound.y || 1000,
 	    			radius: stateSounds?.[index]?.radius || animationSound.radius || 50,
 	    			volume: stateSounds?.[index]?.volume || animationSound.volume || 0.5,
-	    			path: stateSounds?.[index]?.path || animationSound.path || '',
+	    			path: rootForSoundAssets + (stateSounds?.[index]?.path || animationSound.path || ''),
     			},
     			duration : stateSounds?.[index]?.duration || animationSound.duration,
     			delay : stateSounds?.[index]?.delay || animationSound.delay
