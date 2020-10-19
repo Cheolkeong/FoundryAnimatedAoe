@@ -23,64 +23,66 @@ Much of this is subject to change, but for anyone curious to tinker with this in
 These examples are also a work in progress, but here is an end to end example of a working pair of macros with an animation config.
 Animation Manifest:
 ```
-"ColorSpray" : {
-		"lights" : [
-			{
-				"t": "l",
-				"dim": 15,
-				"bright": 15,
-			    "angle": "90",
-			    "tintColor": "#016ba5",
-			    "tintAlpha": 0.65,
-			    "lightAnimation": {
-			       "type": "chroma",
-			       "speed": 10,
-			       "intensity": 10
-			    }
-			},
-			{
-				"t": "l",
-				"dim": 16,
-				"bright": 15,
-			    "angle": "90",
-			    "tintColor": "#ff852b",
-			    "tintAlpha": 0.4,
-			    "lightAnimation": {
-			       "type": "sunburst",
-			       "speed": 8,
-			       "intensity": 4
-			    }
-			},
-			{
-				"t": "l",
-				"dim": 17,
-				"bright": 16,
-			    "angle": "90",
-			    "tintColor": "#a001a5",
-			    "tintAlpha": 0.4,
-			    "lightAnimation": {
-			       "type": "emanation",
-			       "speed": 8,
-			       "intensity": 6
-			    }
-			}
-		],
-		"sounds" : [
-			{
-				"type": "l",
-	    		"radius": 60,
-	    		"volume": 0.5,
-	    		"path": "macroSounds/HEALING%20SPELL%20-%20White%20Magic%20Light%20Throw%20Whoosh%2001%20%20%20%20%5B003701%5D.wav"
-			},
-			{
-				"type": "l",
-	    		"radius": 60,
-	    		"volume": 0.5,
-	    		"path": "macroSounds/SMALL%20LIQUID%20BLOWING%20UP%20EXPLOSION%20-%20Water%20Object%20Demolition%20Burst%20Shatter%20-%2001%20%20%20%20%5B004420%5D.wav"
-			}
-		],
-		"totalDuration": 2000
-	},
+{
+   "ColorSpray":{
+      "lights":[
+         {
+            "t":"l",
+            "dim":15,
+            "bright":15,
+            "angle":"90",
+            "tintColor":"#016ba5",
+            "tintAlpha":0.65,
+            "lightAnimation":{
+               "type":"chroma",
+               "speed":10,
+               "intensity":10
+            }
+         },
+         {
+            "t":"l",
+            "dim":16,
+            "bright":15,
+            "angle":"90",
+            "tintColor":"#ff852b",
+            "tintAlpha":0.4,
+            "lightAnimation":{
+               "type":"sunburst",
+               "speed":8,
+               "intensity":4
+            }
+         },
+         {
+            "t":"l",
+            "dim":17,
+            "bright":16,
+            "angle":"90",
+            "tintColor":"#a001a5",
+            "tintAlpha":0.4,
+            "lightAnimation":{
+               "type":"emanation",
+               "speed":8,
+               "intensity":6
+            }
+         }
+      ],
+      "sounds":[
+         {
+            "type":"l",
+            "radius":60,
+            "volume":0.5,
+            "path":"macroSounds/HEALING%20SPELL%20-%20White%20Magic%20Light%20Throw%20Whoosh%2001%20%20%20%20%5B003701%5D.wav"
+         },
+         {
+            "type":"l",
+            "radius":60,
+            "volume":0.5,
+            "path":"macroSounds/SMALL%20LIQUID%20BLOWING%20UP%20EXPLOSION%20-%20Water%20Object%20Demolition%20Burst%20Shatter%20-%2001%20%20%20%20%5B004420%5D.wav"
+         }
+      ],
+      "totalDuration":2000
+   }
+}
 ```
 
 Action Macro:
