@@ -10,6 +10,8 @@ For use in rigging up player and gm macros to punctuate spell and item effects w
 
 ## How to Use
 
+For more detail, especially if new to JS, please consult the [wiki](https://github.com/Cheolkeong/FoundryAnimatedAoe/wiki/Using-Foundry-Animated-Aoe). As of 10/19/2020 this is also an extremely work-in-progess thing, and its content is subject to drastic change.
+
 Much of this is subject to change, but for anyone curious to tinker with this in its infancy, my current application for this module is as follows:
 
 - **Establish an animation manifest in a journal, using JSON.** This is pretty much required. The module reads the manifest to know what colors, animations, etc go with each manifest key (e.g. `ColorSpray` ). These settings cut down on repetitive code in macros and allow you to update basic animation configurations in one place.
