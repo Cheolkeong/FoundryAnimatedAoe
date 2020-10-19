@@ -126,6 +126,7 @@ class AnimatedAoe {
     		}
     	})
     	const mergedSounds = animationSounds.map((animationSound, index)=> {
+		let path = animationSound.useRootPath ? game.settings.get('animated-aoe', 'rootForSoundAssets') : '';
     		return {
     			sound : {
     				t: stateSounds?.[index]?.t || animationSound.t || 'l',
@@ -133,7 +134,7 @@ class AnimatedAoe {
 	    			y: stateSounds?.[index]?.y || animationSound.y || 1000,
 	    			radius: stateSounds?.[index]?.radius || animationSound.radius || 50,
 	    			volume: stateSounds?.[index]?.volume || animationSound.volume || 0.5,
-	    			path: game.settings.get('animated-aoe', 'rootForSoundAssets') + (stateSounds?.[index]?.path || animationSound.path || ''),
+	    			path: path + (stateSounds?.[index]?.path || animationSound.path || ''),
     			},
     			duration : stateSounds?.[index]?.duration || animationSound.duration,
     			delay : stateSounds?.[index]?.delay || animationSound.delay
