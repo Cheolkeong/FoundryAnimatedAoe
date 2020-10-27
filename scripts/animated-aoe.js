@@ -84,8 +84,9 @@ class AnimatedAoe {
     	let animateAoeObject;
     	let manifestAnimation;
     	if (this.animationManifest?.[manifestKey]) {
-    		console.log('aoe event captured');
-    		manifestAnimation = this.animationManifest[manifestKey];
+			console.log('aoe event captured');
+			stateAnimation =  this._explodeDuplicates(stateAnimation);
+    		manifestAnimation = this._explodeDuplicates(this.animationManifest[manifestKey]);
     		animateAoeObject = this._extendAnimationWithState({stateAnimation, manifestAnimation});
     	}
     	console.log(animateAoeObject);
