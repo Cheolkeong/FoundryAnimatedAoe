@@ -1,4 +1,5 @@
 import TrigHelper from './helpers/trig-helper.js';
+import SceneHelper from './helpers/scene-helper.js';
 
 class AnimatedAoe {
 	constructor() {
@@ -11,7 +12,7 @@ class AnimatedAoe {
             type: String,
             onChange: this._parseJournals.bind(this)
         });
-	game.settings.register("animated-aoe", "rootForSoundAssets", {
+			game.settings.register("animated-aoe", "rootForSoundAssets", {
             name: "Root Path for Sound Assets",
             hint: "particularly for use with servers as journals mess with urls on save",
             scope: "world",
@@ -28,8 +29,6 @@ class AnimatedAoe {
             onChange: this._parseJournals.bind(this)
         });
         Hooks.on("ready", this._parseJournals.bind(this));
-        // Hooks.on("canvasReady", this._onCanvasReady.bind(this));
-        // Hooks.on('controlToken', this._onControlToken.bind(this));
         game.socket.on('module.animated-aoe', (data) => {
         	if(game.user.isGM && data.op === 'animate') {
         		Hooks.call('animateAoe', data.manifestKey, data.stateAnimation);
@@ -37,16 +36,15 @@ class AnimatedAoe {
         	if(!game.users.filter((u) => u.active && u.isGM).length && (data.user === game.user.id)) {
         		ui.notifications.warn('GM must be present for animation macros to work');
         	}
-        })
+        });
 		Hooks.on('animateAoe', this._handleAnimateAoeEvent.bind(this));
         Hooks.on('createJournalEntry', this._parseJournals.bind(this));
         Hooks.on('updateJournalEntry', this._parseJournals.bind(this));
         Hooks.on('deleteJournalEntry', this._parseJournals.bind(this));
-        // Hooks.on("preUpdateToken", this._onPreUpdateToken.bind(this));
-        // Hooks.on("preUpdateWall", this._onPreUpdateWall.bind(this));
 
         this.animationManifest = {};
-	this.trigHelp = new TrigHelper();
+		this.trigHelp = new TrigHelper();
+		this.sceneHelp = new SceneHelper();
     }
 
     get journalName() {
@@ -62,9 +60,9 @@ class AnimatedAoe {
     _getFoldersContentsRecursive(folders, contents) {
         return folders.reduce((contents, folder) => {
             // Cannot use folder.content and folder.children because they are set on populate and only show what the user can see
-            const content = game.journal.entities.filter(j => j.data.folder === folder.id)
-            const children = game.folders.entities.filter(f => f.type === "JournalEntry" && f.data.parent === folder.id)
-            contents.push(...content)
+            const content = game.journal.entities.filter(j => j.data.folder === folder.id);
+            const children = game.folders.entities.filter(f => f.type === "JournalEntry" && f.data.parent === folder.id);
+            contents.push(...content);
             return this._getFoldersContentsRecursive(children, contents);
         }, contents);
     }
@@ -85,7 +83,7 @@ class AnimatedAoe {
     _handleAnimateAoeEvent(manifestKey, stateAnimation) {
     	let animateAoeObject;
     	let manifestAnimation;
-    	if(this.animationManifest?.[manifestKey]){
+    	if (this.animationManifest?.[manifestKey]) {
     		console.log('aoe event captured');
     		manifestAnimation = this.animationManifest[manifestKey];
     		animateAoeObject = this._extendAnimationWithState({stateAnimation, manifestAnimation});
@@ -93,6 +91,27 @@ class AnimatedAoe {
     	console.log(animateAoeObject);
     	return false;
     }
+
+	_explodeDuplicates(animation) {
+		return {
+			lights : this._exploder(animation.lights),
+			sounds : this._exploder(animation.sounds),
+			totalDuration : animation.totalDuration
+		};
+	}
+
+	_exploder(arrayToExpand) {
+		return arrayToExpand.map((configObject) => {
+			if(!configObject.copies) {
+				return configObject;
+			}
+			return [...Array(configObject.copies)].map(() =>{
+				return configObject;
+			});
+		}).reduce((acc, curr)=> {
+			return acc.concat(curr);
+		}, []);
+	}
 
     _extendAnimationWithState({
     	stateAnimation,
@@ -103,7 +122,7 @@ class AnimatedAoe {
     	const animationLights = manifestAnimation.lights || [];
     	const stateSounds = stateAnimation.sounds || [];
     	const animationSounds = manifestAnimation.sounds || [];
-    	const mergedLights = animationLights.map((animationLight, index)=> {
+    	const mergedLights = animationLights.map((animationLight, index) => {
     		return {
     			light : {
     				t: stateLights?.[index]?.t || animationLight.t || 'l',
@@ -126,7 +145,7 @@ class AnimatedAoe {
     		}
     	})
     	const mergedSounds = animationSounds.map((animationSound, index)=> {
-		let path = animationSound.useRootPath ? game.settings.get('animated-aoe', 'rootForSoundAssets') : '';
+			let path = animationSound.useRootPath ? game.settings.get('animated-aoe', 'rootForSoundAssets') : '';
     		return {
     			sound : {
     				t: stateSounds?.[index]?.t || animationSound.t || 'l',
@@ -172,7 +191,7 @@ class AnimatedAoe {
     	: await canvas.sounds.createMany(sounds.map((sound)=>{
     		return {...sound.sound};
     	}));
-    	//TODO: This is ugly but what it it works?
+
     	if (totalDuration) {
     		await deadline;
     		const lightIds = lights.length === 1 ? [lightObjects.data._id]
@@ -186,7 +205,7 @@ class AnimatedAoe {
     		await canvas.sounds.deleteMany(soundIds);
     		await canvas.lighting.deleteMany(lightIds);
     	}
-    	
+
     }
 }
 
